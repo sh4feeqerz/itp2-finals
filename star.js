@@ -1,5 +1,5 @@
 
-//----------------------------------------------------------------------own code
+//--------------------------------------------------------------------------------------------------------own code start
 function Star(angle, orbitRadius, starSize, orbitSpeed) {
 
 
@@ -15,12 +15,12 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
     var joltX = 0;
     var joltY = 0;
 
-    //-----------------------------------------------------------------------rotating the surrounding stars around the central star
+    //------------------------------------------------------------rotating the surrounding stars around the central star
     this.update = function(speedMultiplier) {
 
         var currentSpeed = speed * speedMultiplier;
 
-        //-------------------------------------------------------------------------calculations to similate 3D movement of surrounding stars
+        //--------------------------------------------------------calculations to similate 3D movement of surrounding stars
         var newX = x * cos(currentSpeed) - z * sin(currentSpeed);
         var newZ = x * sin(currentSpeed) + z * cos(currentSpeed);
 
@@ -92,4 +92,4 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
         
     };
 }
-
+//-------------------------------------------------------------------------------own code end
