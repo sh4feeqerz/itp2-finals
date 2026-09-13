@@ -1,6 +1,6 @@
-/*
-        Extension 2 Based on coursera slides : Moving Worm Visualiser
-*/
+
+//-------------------- own code, mid term extension on coursera slides : Moving Worm Visualiser
+
 
 function Worm (){
     this.name = "worm";
