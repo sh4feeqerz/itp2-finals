@@ -59,9 +59,9 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
         var perspective =
             focalLength / (focalLength + z);
 
-        var screenX = width / 2 + x * perspective;
+        var screenX = width / 2 + x * perspective + joltX;
 
-        var screenY = height / 2 + y * perspective;
+        var screenY = height / 2 + y * perspective + joltY;
 
         // Stars closer to the viewer appear larger
         var displaySize = size * perspective;
