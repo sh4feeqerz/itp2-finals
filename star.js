@@ -1,45 +1,31 @@
-// Constructor function representing one star
 function Star(angle, orbitRadius, starSize, orbitSpeed) {
 
-    // Private properties storing the star's 3D position
+
+    //----------------------------------------------------------------------- because its 3D, stars have XYZ
     var x = cos(angle) * orbitRadius;
-
     var y = random(-orbitRadius * 0.12, orbitRadius * 0.12 );
-
     var z = sin(angle) * orbitRadius;
 
     var size = starSize;
     var speed = orbitSpeed;
-    // Temporary displacement created by a transient
+
+    //-----------------------------------------------------------------------transients cause stars to shake/jolt aound
     var joltX = 0;
     var joltY = 0;
 
-    /*
-    * Public method that rotates the star around
-    * the centre of the star system.
-    */
+    //-----------------------------------------------------------------------rotating the surrounding stars around the central star
     this.update = function(speedMultiplier) {
 
-        // Change the orbital speed using the low-mid energy
-        var currentSpeed =
-            speed * speedMultiplier;
+        var currentSpeed = speed * speedMultiplier;
 
-        /*
-        * Store the new coordinates temporarily.
-        * Both calculations must use the old x and z values.
-        */
-        var newX =
-            x * cos(currentSpeed) -
-            z * sin(currentSpeed);
-
-        var newZ =
-            x * sin(currentSpeed) +
-            z * cos(currentSpeed);
+        //-------------------------------------------------------------------------calculations to similate 3D movement of surrounding stars
+        var newX = x * cos(currentSpeed) - z * sin(currentSpeed);
+        var newZ = x * sin(currentSpeed) + z * cos(currentSpeed);
 
         x = newX;
         z = newZ;
 
-        // Gradually return the jolt displacement to zero
+        //------------------------------------------returns XY to zero, or else
         joltX *= 0.4;
         joltY *= 0.4;
     };
@@ -75,7 +61,7 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
         var screenY = height / 2 + y * perspective + joltY;
 
         // Stars closer to the viewer appear larger
-        var displaySize = size * perspective;
+        var displaySize = size * perspective *1.2;
 
         // Stars closer to the viewer appear brighter
         var brightness = map(

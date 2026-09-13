@@ -1,10 +1,6 @@
-//global for the controls and input 
 var controls = null;
-//store visualisations in a container
 var vis = null;
-//variable for the p5 sound object
 var sound = null;
-//variable for p5 fast fourier transform
 var fourier;
 
 var worm;
@@ -20,10 +16,8 @@ function setup(){
 	background(0);
 	controls = new ControlsAndInput();
 
-	//instantiate the fft object
 	fourier = new p5.FFT();
 
-	//create a new visualisation container and add visualisations
 	vis = new Visualisations();
 	vis.add(new Spectrum());
 	vis.add(new WavePattern());
@@ -35,6 +29,7 @@ function setup(){
 	
 	vis.add(new Stars());
 
+	//-------------------------------------------------creating gui for worm controls
 	gui = createGui("Worm Controls");
 
 	sliderRange(0.00, 1, 0.02);
@@ -54,9 +49,17 @@ function setup(){
 
 function draw(){
 	background(0);
-	//draw the selected visualisation
+
 	vis.selectedVisual.draw();
-	//draw the controls on top.
+
+	//---------------------------------------------------------only show gui for worm
+	if(vis.selectedVisual.name == "worm"){
+		gui.show();
+	}
+	else{
+		gui.hide();
+	}
+
 	controls.draw();
 }
 
@@ -68,8 +71,8 @@ function keyPressed(){
 	controls.keyPressed(keyCode);
 }
 
-//when the window has been resized. Resize canvas to fit 
-//if the visualisation needs to be resized call its onResize method
+
+//-----------------------------------------------------------------for window resizing
 function windowResized(){
 	resizeCanvas(windowWidth, windowHeight);
 	if(vis.selectedVisual.hasOwnProperty('onResize')){

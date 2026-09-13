@@ -1,11 +1,11 @@
 function Stars() {
-    this.name = "Star System";
+    this.name = "StarSystem";
 
     var stars = [];
 
     var focalLength = 500;
 
-    // Detect sudden increases in the music's energy
+    //--------------------------------------------------------------------adapted  from coursera BeatDetector and improved upon
     var transientDetector = new DetectTransients();
 
     for (var i = 0; i < 180; i++) {
@@ -25,7 +25,6 @@ function Stars() {
         );
     }
 
-    // Public draw method called by the visualisation container
     this.draw = function() {
         push();
 
@@ -45,7 +44,7 @@ function Stars() {
 
         drawCore(bassEnergy);
 
-        // Detect a transient and jolt the stars
+        //----------------------------------------------------------------detects trasients in the music and triggers jolt in surrounding stars
         if (transientDetector.detectTransient(spectrum)) {
 
             for (var i = 0; i < stars.length; i++) {
@@ -53,12 +52,11 @@ function Stars() {
             }
         }
 
-        // First update every star's position
         for (var i = 0; i < stars.length; i++) {
             stars[i].update(speedMultiplier);
         }
 
-        // Draw stars on the far side
+        //------------------------------------------------------------------to draw stars that go behind the center star
         for (var i = 0; i < stars.length; i++) {
 
             if (stars[i].isBehind()) {
@@ -66,10 +64,10 @@ function Stars() {
             }
         }
 
-        // Draw the central star over the distant stars
+        //--------------------------------------------------------------------drawing center core star
         drawCore(bassEnergy);
 
-        // Draw stars on the near side
+        //-------------------------------------------------------------------drawing stars that are go in front of center star
         for (var i = 0; i < stars.length; i++) {
 
             if (!stars[i].isBehind()) {
@@ -80,7 +78,7 @@ function Stars() {
         pop();
     };
 
-    // Private function to draw the bass-reactive central star
+    //------------------------------------------------------controlling the center core star to react to bass
     function drawCore(bassEnergy) {
 
         var coreSize = map(
@@ -89,18 +87,53 @@ function Stars() {
             15, 80
         );
 
+        //----------------------------------------------------------------for the center star to change color according to bass
+        var greenValue = map(
+            bassEnergy,
+            0, 255,
+            255, 180
+        );
+
+        var blueValue = map(
+            bassEnergy,
+            0, 255,
+            220, 0
+        );
+
         noStroke();
 
-        // Outer glow
-        fill(80, 130, 255, 35);
-        ellipse(width / 2, height / 2, coreSize * 2.5);
+        fill(0);
 
-        // Middle glow
-        fill(120, 180, 255, 80);
-        ellipse(width / 2, height / 2, coreSize * 1.6);
+        //-------------------------------------------------------drawing center core star
+        ellipse(
+            width / 2, height / 2, coreSize * 2.5
+        );
 
-        // Bright centre
-        fill(255);
-        ellipse(width / 2, height / 2, coreSize);
+        //----------------------------------outer
+        fill(
+            255, greenValue, blueValue, 35
+        );
+
+        ellipse(
+            width / 2, height / 2, coreSize * 2.5
+        );
+
+        //-----------------------------------middle glow
+        fill(
+            255, greenValue, blueValue, 80
+        );
+
+        ellipse(
+            width / 2, height / 2, coreSize * 1.6
+        );
+
+        //----------------------------------------solid core
+        fill(
+            255, greenValue, blueValue
+        );
+
+        ellipse(
+            width / 2, height / 2, coreSize
+        );
     }
 }
