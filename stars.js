@@ -1,3 +1,5 @@
+
+//--------------------------------------------------------------------------own code
 function Stars() {
     this.name = "StarSystem";
 
@@ -5,7 +7,7 @@ function Stars() {
 
     var focalLength = 500;
 
-    //--------------------------------------------------------------------adapted  from coursera BeatDetector and improved upon
+    //--------------------------------------------------------------------adapted  from coursera BeatDetector
     var transientDetector = new DetectTransients();
 
     for (var i = 0; i < 180; i++) {
@@ -41,8 +43,6 @@ function Stars() {
             0, 255,
             0.5, 2.5
         );
-
-        drawCore(bassEnergy);
 
         //----------------------------------------------------------------detects trasients in the music and triggers jolt in surrounding stars
         if (transientDetector.detectTransient(spectrum)) {

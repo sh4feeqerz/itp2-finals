@@ -1,3 +1,5 @@
+
+//----------------------------------------------------------------------own code
 function Star(angle, orbitRadius, starSize, orbitSpeed) {
 
 

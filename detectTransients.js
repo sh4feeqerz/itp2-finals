@@ -48,5 +48,3 @@ function DetectTransients() { //-------------------------------------------adapt
         return isTransient;
     };
 }
-
-/* End - code adapted from CM1010 course material */

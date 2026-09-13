@@ -4,15 +4,17 @@ function ControlsAndInput(){
 	
 	this.menuDisplayed = false;
 	
-	//playback button displayed in the top left of the screen
 	this.playbackButton = new PlaybackButton();
+	this.fullscreenButton = new FullscreenButton();
 
 	//make the window fullscreen or revert to windowed
 	this.mousePressed = function(){
-		if(!this.playbackButton.hitCheck()){
-			// var fs = fullscreen();
-			// fullscreen(!fs);
+
+		if(this.playbackButton.hitCheck()){
+			return;
 		}
+
+		this.fullscreenButton.hitCheck();
 	};
 
 	//responds to keyboard presses
@@ -23,9 +25,9 @@ function ControlsAndInput(){
 			this.menuDisplayed = !this.menuDisplayed;
 		}
 
-		if(keycode > 48 && keycode < 58){
+		if(keycode > 48 && keycode < 49 + vis.visuals.length){
 			var visNumber = keycode - 49;
-			vis.selectVisual(vis.visuals[visNumber].name); 
+			vis.selectVisual(vis.visuals[visNumber].name); 123
 		}
 	};
 
@@ -37,9 +39,8 @@ function ControlsAndInput(){
 		strokeWeight(2);
 		textSize(34);
 
-		//playback button 
 		this.playbackButton.draw();
-		//only draw the menu if menu displayed is set to true.
+		this.fullscreenButton.draw();
 		if(this.menuDisplayed){
 
 			text("Select a visualisation:", 100, 30);

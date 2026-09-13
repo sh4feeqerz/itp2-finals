@@ -70,7 +70,7 @@ function Needles() {
 		//translate so 0 is at the bottom of the needle
 		translate(centreX, bottomY);
 		//map the energy to the angle for the plot
-		theta = map(energy, 0, 255, minAngle, maxAngle);
+		var theta = map(energy, 0, 255, minAngle, maxAngle);
 		//calculate x and y coorindates from angle for the length of needle
 		var x = this.dialRadius * cos(theta);
 		var y = this.dialRadius * sin(theta);
