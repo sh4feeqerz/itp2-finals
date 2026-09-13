@@ -10,19 +10,14 @@ function Stars() {
 
     for (var i = 0; i < 180; i++) {
         var angle = random(TWO_PI);
-        var orbitRadius = random(
-            50,
-            min(width, height) * 0.4
-        );
+        var orbitRadius = random(50, min(width, height) * 0.4);
 
         var starSize = random(1.5, 4);
 
         var orbitSpeed = map(
             orbitRadius,
-            50,
-            min(width, height) * 0.4,
-            0.012,
-            0.003
+            50, min(width, height) * 0.4,
+            0.012, 0.003
         );
 
         stars.push(
@@ -60,10 +55,7 @@ function Stars() {
 
         // Draw every star in the array
         for (var i = 0; i < stars.length; i++) {
-            stars[i].draw(
-                focalLength,
-                speedMultiplier
-            );
+            stars[i].draw(focalLength,speedMultiplier);
         }
 
         pop();
@@ -74,36 +66,22 @@ function Stars() {
 
         var coreSize = map(
             bassEnergy,
-            0,
-            255,
-            15,
-            80
+            0, 255,
+            15, 80
         );
 
         noStroke();
 
         // Outer glow
         fill(80, 130, 255, 35);
-        ellipse(
-            width / 2,
-            height / 2,
-            coreSize * 2.5
-        );
+        ellipse(width / 2, height / 2, coreSize * 2.5);
 
         // Middle glow
         fill(120, 180, 255, 80);
-        ellipse(
-            width / 2,
-            height / 2,
-            coreSize * 1.6
-        );
+        ellipse(width / 2, height / 2, coreSize * 1.6);
 
         // Bright centre
         fill(255);
-        ellipse(
-            width / 2,
-            height / 2,
-            coreSize
-        );
+        ellipse(width / 2, height / 2, coreSize);
     }
 }
