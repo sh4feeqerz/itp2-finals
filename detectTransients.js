@@ -1,23 +1,13 @@
 function DetectTransients() { //-------------------------------------------adapted from BeatDetect in coursera
 
-    // Store the recent spectrum-energy values
     var sampleBuffer = [];
 
-    /*
-     * Public method that compares the current spectrum
-     * against the recent average.
-     */
     this.detectTransient = function(spectrum) {
 
         var isTransient = false;
         var sum = 0;
 
-        /*
-         * Calculate the total energy of the current
-         * spectrum. Squaring each value creates a larger
-         * difference between quiet and loud values.
-         */
-        for (var i = 0; i < spectrum.length; i++) {
+        for (var i = 0; i < spectrum.length; i++) { //------------------------calculate the total energy of the transient
             sum += spectrum[i] * spectrum[i];
         }
 

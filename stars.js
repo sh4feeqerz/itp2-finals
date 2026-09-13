@@ -45,7 +45,7 @@ function Stars() {
 
         drawCore(bassEnergy);
 
-        // Jolt the surrounding stars when a transient is detected
+        // Detect a transient and jolt the stars
         if (transientDetector.detectTransient(spectrum)) {
 
             for (var i = 0; i < stars.length; i++) {
@@ -53,9 +53,28 @@ function Stars() {
             }
         }
 
-        // Draw every star in the array
+        // First update every star's position
         for (var i = 0; i < stars.length; i++) {
-            stars[i].draw(focalLength,speedMultiplier);
+            stars[i].update(speedMultiplier);
+        }
+
+        // Draw stars on the far side
+        for (var i = 0; i < stars.length; i++) {
+
+            if (stars[i].isBehind()) {
+                stars[i].draw(focalLength);
+            }
+        }
+
+        // Draw the central star over the distant stars
+        drawCore(bassEnergy);
+
+        // Draw stars on the near side
+        for (var i = 0; i < stars.length; i++) {
+
+            if (!stars[i].isBehind()) {
+                stars[i].draw(focalLength);
+            }
         }
 
         pop();

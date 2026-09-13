@@ -15,28 +15,34 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
     var joltY = 0;
 
     /*
-     * Private method that rotates the star around
-     * the centre of the star system.
-     */
-    function update() {
+    * Public method that rotates the star around
+    * the centre of the star system.
+    */
+    this.update = function(speedMultiplier) {
+
+        // Change the orbital speed using the low-mid energy
+        var currentSpeed =
+            speed * speedMultiplier;
 
         /*
-         * Store the new coordinates temporarily.
-         * Both calculations must use the old x and z values.
-         */
-        var newX = x * cos(speed) - z * sin(speed);
+        * Store the new coordinates temporarily.
+        * Both calculations must use the old x and z values.
+        */
+        var newX =
+            x * cos(currentSpeed) -
+            z * sin(currentSpeed);
 
-        var newZ = x * sin(speed) + z * cos(speed);
+        var newZ =
+            x * sin(currentSpeed) +
+            z * cos(currentSpeed);
 
         x = newX;
         z = newZ;
 
-        /*
-        * Gradually return the temporary displacement to zero.
-        */
-        joltX *= 0.75;
-        joltY *= 0.75;
-    }
+        // Gradually return the jolt displacement to zero
+        joltX *= 0.4;
+        joltY *= 0.4;
+    };
 
     /*
     * Public method that gives the star a temporary
@@ -47,11 +53,16 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
         joltY = random(-strength, strength);
     };
 
+    /*
+    * Return true when the star is on the far
+    * side of the central star.
+    */
+    this.isBehind = function() {
+        return z > 0;
+    };
+
     // Public method to update and draw the star
     this.draw = function(focalLength) {
-
-        update();
-
         /*
          * Convert the star's 3D position into a position
          * on the 2D canvas.
@@ -89,6 +100,8 @@ function Star(angle, orbitRadius, starSize, orbitSpeed) {
             screenY,
             displaySize
         );
+
+        
     };
 }
 
